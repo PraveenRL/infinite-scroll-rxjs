@@ -1,0 +1,30 @@
+<br />
+<h1 class="center"><b>Infinite Loading List</b></h1>
+<h4 class="center">
+  <b>Remaining Count : </b>{{data$.remainingCount$ | async}} |
+  <b>Total Count : </b>{{data$.totalCount$ | async}}
+</h4>
+<hr />
+
+<mat-list>
+  <mat-list-item *ngFor="let item of data$ | async"
+    >{{item.name}}</mat-list-item
+  >
+  <mat-list-item *ngIf="data$.loading$ | async" class="center"
+    >Loading ...</mat-list-item
+  >
+</mat-list>
+
+<div class="center">
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="loadMore()"
+    *ngIf="data$.hasMore$ | async"
+  >
+    Load More
+  </button>
+  &nbsp;
+  <button mat-raised-button color="primary" (click)="reset()">Reset</button
+  ><br />
+</div>
